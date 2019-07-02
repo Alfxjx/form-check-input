@@ -17,4 +17,8 @@ npm run example
 ```
 打开 [此链接](http://localhost:6324/example.test.html)，查看实例功能。
 
+## TIPS
 
+`gitbook build` 之前需要把`/docs/` 改回 `_book/`，打包完成之后再改回去。
+
+这样就可以使用github的主页了，而且链接短一点。
