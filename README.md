@@ -9,7 +9,7 @@ formCheck.init(id,props);
 
 ## 官方文档
 
-[this](https://alfxjx.github.io/form-check-input/)
+[this](https://alfxjx.github.io/form-check/)
 
 ## 测试功能
 
