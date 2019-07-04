@@ -3,6 +3,10 @@
 
 ## 快速上手
 
+```
+formCheck.init(id,props);
+```
+
 ## 官方文档
 
 [this](https://alfxjx.github.io/form-check-input/)
@@ -15,7 +19,7 @@
 npm install http-server -g
 npm run example
 ```
-打开 [此链接](http://localhost:6324/example.test.html)，查看实例功能。
+打开 [此链接](http://localhost:6324/index.html)，查看实例功能。
 
 ## TIPS
 
