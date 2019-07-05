@@ -1,2 +1,4 @@
-# 开发2
+# Bug list
+
+to be continued...
 
