@@ -9,11 +9,13 @@ formCheck.init(id,props);
 
 ## 官方文档
 
-[this](https://alfxjx.github.io/form-check/) 主要包括使用说明以及二次开发的一些帮助。
+[this](https://alfxjx.github.io/formCheck/) 主要包括使用说明以及二次开发的一些帮助。
 
 ## API
 
 ## Issues
+
+请在本项目的[issues](https://github.com/Alfxjx/formCheck/issues)里面提问。
 
 ## 测试功能
 
