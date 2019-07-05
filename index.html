@@ -4,20 +4,41 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>演示</title>
+    <title>演示</title>
+    <style>
+      /* 输入框尺寸取决于外包裹的div尺寸 */
+      .width{
+        width: 300px;
+      }
+      .form-check-input{
+        margin: 10px 0;
+      }
+    </style>
 	</head>
 	<body>
     <p>this is a demo</p>
-    <div id="root"></div>
-    <div id="root1"></div>
+    <div class="width" id="root"></div>
+    <div class="width" id="root1"></div>
+    <div class="width" id="root2"></div>
+    <div class="width" id="root3"></div>
 		<script src="../release/index.js"></script>
 		<script>
 			formCheck.init('root', {
-        placeholder:'123'
+        placeholder:'phone',
+        isPhone:true
       });
       formCheck.init('root1',{
-        placeholder:'4555'
-      })
+        placeholder:'web',
+        isWeb:true
+      });
+      formCheck.init('root2',{
+        placeholder:'e-mail',
+        isEmail:true
+      });
+      formCheck.init('root3',{
+        placeholder:'password',
+        isPassword:true
+      });
 		</script>
 	</body>
 </html>
