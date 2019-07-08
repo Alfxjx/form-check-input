@@ -19,7 +19,7 @@ var deaultPassword = /^[a-zA-Z0-9]\w{5,17}$/;
 
 var deaultStyle = {
 	display: 'inline-block',
-	width: '90%',
+	width: '80%',
 	padding: '0.375rem 0.75rem',
 	lineHeight: '1.5',
 	backgroundColor: '#fff',
@@ -50,6 +50,8 @@ var setProps = function setProps(_ref) {
 	    placeholder = _ref$placeholder === undefined ? 'please input' : _ref$placeholder,
 	    _ref$isMust = _ref.isMust,
 	    isMust = _ref$isMust === undefined ? false : _ref$isMust,
+	    _ref$mustPosition = _ref.mustPosition,
+	    mustPosition = _ref$mustPosition === undefined ? 'left' : _ref$mustPosition,
 	    type = _ref.type,
 	    _ref$withdefaultCSS = _ref.withdefaultCSS,
 	    withdefaultCSS = _ref$withdefaultCSS === undefined ? true : _ref$withdefaultCSS;
@@ -62,6 +64,7 @@ var setProps = function setProps(_ref) {
 		showAutofix: showAutofix,
 		placeholder: placeholder,
 		isMust: isMust,
+		mustPosition: mustPosition,
 		type: type,
 		withdefaultCSS: withdefaultCSS
 	};
@@ -150,10 +153,18 @@ var drawMust = function drawMust(id, prop) {
 	if (prop.isMust) {
 		console.log('draw must');
 		var must = document.createElement('span');
-		must.innerHTML = "*";
-		must.style.color = "red";
-		must.style.margin = "0 0 0 5px";
-		$(id).appendChild(must);
+		must.innerHTML = '*';
+		must.style.color = 'red';
+		must.style.margin = '0 5px';
+		switch (prop.mustPosition) {
+			case 'left':
+				var inputNode = $(id).childNodes[0];
+				$(id).insertBefore(must, inputNode);
+				break;
+			case 'right':
+				$(id).appendChild(must);
+				break;
+		}
 	}
 };
 

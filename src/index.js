@@ -7,7 +7,7 @@ const deaultPassword = /^[a-zA-Z0-9]\w{5,17}$/;
 
 const deaultStyle = {
 	display: 'inline-block',
-	width: '90%',
+	width: '80%',
 	padding: '0.375rem 0.75rem',
 	lineHeight: '1.5',
 	backgroundColor: '#fff',
@@ -30,6 +30,7 @@ const setProps = ({
 	showAutofix = false,
 	placeholder = 'please input',
 	isMust = false,
+	mustPosition = 'left',
 	type,
 	withdefaultCSS = true,
 }) => ({
@@ -40,7 +41,8 @@ const setProps = ({
 	showHelp,
 	showAutofix,
 	placeholder,
-	isMust,
+  isMust,
+  mustPosition,
 	type,
 	withdefaultCSS,
 });
@@ -137,12 +139,20 @@ const drawEye = prop => {};
 const drawClear = prop => {};
 const drawMust = (id, prop) => {
 	if (prop.isMust) {
-    console.log('draw must');
-    let must = document.createElement('span');
-    must.innerHTML = "*";
-    must.style.color = "red";
-    must.style.margin = "0 0 0 5px";
-    $(id).appendChild(must);
+		console.log('draw must');
+		let must = document.createElement('span');
+		must.innerHTML = '*';
+		must.style.color = 'red';
+		must.style.margin = '0 5px';
+		switch (prop.mustPosition) {
+			case 'left':
+				let inputNode = $(id).childNodes[0];
+				$(id).insertBefore(must, inputNode);
+				break;
+			case 'right':
+				$(id).appendChild(must);
+				break;
+		}
 	}
 };
 export { init };

@@ -83,17 +83,20 @@
 		<div class="width" id="root"></div>
 		<div class="width" id="root1"></div>
 		<div class="width" id="root2"></div>
-    <div class="width" id="root3"></div>
+		<div class="width" id="root3"></div>
 		<script src="../release/index.js"></script>
 		<script>
 			formCheck.init('root', {
 				placeholder: 'phone',
 				type: 'phone',
 				isMust: true,
+				mustPosition: 'left',
 			});
 			formCheck.init('root1', {
 				placeholder: 'web',
 				type: 'web',
+				isMust: true,
+				mustPosition: 'right',
 			});
 			formCheck.init('root2', {
 				placeholder: 'e-mail',
