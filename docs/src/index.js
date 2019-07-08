@@ -17,10 +17,12 @@ const deaultStyle = {
 	transition: 'border-color .15s ease-in-out,box-shadow .15s ease-in-out',
 };
 
-const setCss = (obj, style) => {
-  for (let attr in style){
-    obj.style[attr] = style[attr];
-  };
+const setCss = (obj, style, shouldGetCSS) => {
+	if(shouldGetCSS){
+    for (let attr in style) {
+      obj.style[attr] = style[attr];
+    }
+  }
 };
 
 const $ = id => {
@@ -28,7 +30,7 @@ const $ = id => {
 };
 
 const setProps = ({
-	lang = 'en',
+	lang = 'cn',
 	showClear = false,
 	showEye = false,
 	showHint = true,
@@ -36,10 +38,8 @@ const setProps = ({
 	showAutofix = false,
 	placeholder = 'please input',
 	isMust = false,
-	isPhone = false,
-	isWeb = false,
-	isEmail = false,
-	isPassword = false,
+  type,
+  withdefaultCSS = true,
 }) => ({
 	lang,
 	showClear,
@@ -49,10 +49,8 @@ const setProps = ({
 	showAutofix,
 	placeholder,
 	isMust,
-	isPhone,
-	isWeb,
-	isEmail,
-	isPassword,
+  type,
+  withdefaultCSS
 });
 
 const init = (id, properties) => {
@@ -60,7 +58,7 @@ const init = (id, properties) => {
 	let prop = setProps(properties || {});
 	$(id).appendChild(input);
 	$(id).childNodes[0].className = 'form-check-input';
-	setCss(input, deaultStyle);
+	setCss(input, deaultStyle, prop.withdefaultCSS);
 	input.placeholder = prop.placeholder;
 	let inputText = watchTyping(id, prop);
 	console.log(`目前的值是${inputText}`);
@@ -86,33 +84,30 @@ const watchTyping = (id, prop) => {
 		proxyInput.text = e.target.value;
 		console.log(`input:${proxyInput.text}`);
 		let formatRes = formatTest(proxyInput.text, prop);
-		console.log(formatRes);
+		console.log(`${prop.type}+${formatRes}`);
 		return proxyInput.text;
 	});
 };
 
 const formatTest = (val, prop) => {
-	let res = {};
-	if (prop.isPhone) {
-		let phone = regPhone.test(val);
-		console.log(phone);
-		res['phone'] = phone;
-	}
-	if (prop.isEmail) {
-		let email = regEmail.test(val);
-		console.log(email);
-		res['email'] = email;
-	}
-	if (prop.isWeb) {
-		let web = regWeb.test(val);
-		console.log(web);
-		res['web'] = web;
-	}
-	if (prop.isPassword) {
-		let password = deaultPassword.test(val);
-		console.log(password);
-		res['password'] = password;
-	}
+	let res;
+  switch(prop.type){
+    case("email"):
+      res = regEmail.test(val);
+      break;
+    case("phone"):
+      res = regPhone.test(val);
+      break;
+    case("web"):
+      res = regWeb.test(val);
+      break;
+    case("password"):
+      res = deaultPassword.test(val);
+      break;
+    default:
+      res = true;
+      break;  
+  }
 	return res;
 };
 

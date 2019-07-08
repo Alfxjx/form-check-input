@@ -30,7 +30,7 @@ const $ = id => {
 };
 
 const setProps = ({
-	lang = 'en',
+	lang = 'cn',
 	showClear = false,
 	showEye = false,
 	showHint = true,

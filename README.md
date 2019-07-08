@@ -45,6 +45,19 @@ formCheck.init(id,props);
 
 ## API
 
+| name 名称      | type 类型 | default 默认值 | describe 描述                          |
+| ------------ | :-----: | :---------: | ------------------------------------------- |
+| lang         | String  |    cn       | 语言，目前支持中文                           |
+| showClear        | Boolean  |   false          | 全部清除按钮       |
+| showEye        | Boolean  |     false        | 显示密码按钮           |
+| showHint        | Boolean  |      true       | 显示输入结果的提示行        |
+| showHelp        | Boolean  |        false     | 显示输入内容提示        |
+| showAutofix        | Boolean  |       false      | 自动补全          |
+| placeholder        | String  |     please input        | 占位文字           |
+| isMust        | Boolean  |        false     | 是否是必填项（*）           |
+| type        | String  |       /      | 需要检查的格式类型           |
+| withdefaultCSS        | Boolean  |      true       | 是否添加默认样式（Bootstrap）  |
+
 ## Issues
 
 请在本项目的[issues](https://github.com/Alfxjx/form-check-input/issues)里面提问。
@@ -63,7 +76,11 @@ npm run example
 
 ## TODO
 
-## Bug List
+- showClear & showEye
+- showHint & showHelp
+- showAutofix
+- isMust
+
 
 ## TIPS
 

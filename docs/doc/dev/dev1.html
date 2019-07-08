@@ -239,8 +239,43 @@
                                 
                                 <h1 id="&#x5404;&#x51FD;&#x6570;&#x529F;&#x80FD;">&#x5404;&#x51FD;&#x6570;&#x529F;&#x80FD;</h1>
 <p>to be continued...</p>
-<h2 id="init">init()</h2>
-<h2 id="setprops">setProps()</h2>
+<h2 id="initid-properties"><code>init(id, properties)</code></h2>
+<p>&#x9009;&#x62E9;&#x5BF9;&#x5E94;&#x7684;<code>id</code>&#x8FDB;&#x884C;&#x6302;&#x8F7D;&#xFF0C;&#x5E76;&#x4E14;&#x5E94;&#x7528;&#x914D;&#x7F6E;&#x7684;<code>properties</code>&#x3002;
+&#x66B4;&#x9732;&#x51FA;&#x6765;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x4F7F;&#x7528;&#x65F6;&#x4E00;&#x5B9A;&#x4F1A;&#x8C03;&#x7528;&#x7684;&#x51FD;&#x6570;&#x3002;</p>
+<h2 id="setprops"><code>setProps()</code></h2>
+<p>&#x5C06;&#x7528;&#x6237;&#x7684;&#x8BBE;&#x7F6E;&#x5E94;&#x7528;&#x5230;&#x65B9;&#x6CD5;&#x4E2D;&#xFF0C;&#x9ED8;&#x8BA4;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E0B;default&#x914D;&#x7F6E;&#x3002;</p>
+<h2 id="setcssobj-style-shouldgetcss"><code>setCss(obj, style, shouldGetCSS)</code></h2>
+<p>&#x7ED9;<code>input</code>&#x8BBE;&#x7F6E;&#x6837;&#x5F0F;&#x7684;&#x51FD;&#x6570;&#x3002;&#x9ED8;&#x8BA4;&#x7684;&#x4E00;&#x5957;&#x6837;&#x5F0F;&#x6765;&#x81EA;&#x4E8E;<a href="https://v3.bootcss.com/css/#forms" target="_blank">Bootstrap</a></p>
+<p>&#x53EF;&#x4EE5;&#x914D;&#x7F6E;API&#x91CC;&#x9762;&#x7684; <code>withdefaultCSS</code> &#x6765;&#x5F00;&#x542F;&#x6216;&#x8005;&#x5173;&#x95ED;&#x3002;</p>
+<p><strong>PS</strong> &#x63D2;&#x4EF6;&#x66B4;&#x9732;&#x4E86;&#x4E00;&#x4E2A;&#x7C7B; <code>form-check-input</code>,&#x53EF;&#x4EE5;&#x81EA;&#x884C;&#x8BBE;&#x7F6E;&#x6837;&#x5F0F;&#x3002;</p>
+<h2 id="watchtypingidprop"><code>watchTyping(id,prop)</code></h2>
+<p>&#x672C;&#x51FD;&#x6570;&#x5B9E;&#x73B0;&#x4E86;&#x5BF9;&#x8F93;&#x5165;&#x6570;&#x636E;&#x7684; <strong>&#x53CC;&#x5411;&#x7ED1;&#x5B9A;</strong>&#xFF0C;&#x4F7F;&#x7528;&#x7684;&#x662F;ES6&#x7684;<code>Proxy</code>&#x548C;<code>Reflect</code>&#x8BED;&#x6CD5;&#xFF0C;&#x5BF9;&#x8F93;&#x5165;&#x7684;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x4EE3;&#x7406;&#xFF0C;&#x5B9E;&#x73B0;&#x4E86;&#x7C7B;&#x4F3C;MVVM&#x7684;&#x6548;&#x679C;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> watchTyping = (id, prop) =&gt; {
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-keyword">let</span> proxyInput = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(inputNode, {
+        get: (target, key, receiver) =&gt; {
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Reflect</span>.get(target, key, receiver);
+        },
+        set: (target, key, value, receiver) =&gt; {
+            <span class="hljs-keyword">if</span> (key === <span class="hljs-string">&apos;text&apos;</span>) {
+                target[key] = value;
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Reflect</span>.set(target, key, value, receiver);
+        },
+    });
+  <span class="hljs-comment">// ...</span>
+}
+</code></pre>
+<h2 id="formattestvalprop"><code>formatTest(val,prop)</code></h2>
+<p>&#x5B9E;&#x73B0;&#x7684;&#x662F;&#x5BF9;&#x8F93;&#x5165;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x68C0;&#x67E5;&#x3002;&#x9ED8;&#x8BA4;&#x7684;&#x68C0;&#x67E5;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E3A;&#xFF1A;</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> regEmail = <span class="hljs-regexp">/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/</span>;
+<span class="hljs-keyword">const</span> regPhone = <span class="hljs-regexp">/^[1][3,4,5,7,8][0-9]{9}$/</span>;
+<span class="hljs-keyword">const</span> regWeb = <span class="hljs-regexp">/^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/</span>;
+<span class="hljs-keyword">const</span> deaultPassword = <span class="hljs-regexp">/^[a-zA-Z0-9]\w{5,17}$/</span>;
+</code></pre>
+<blockquote>
+<p>&#x672A;&#x6765;&#x4F1A;&#x5F15;&#x5165;&#x66F4;&#x591A;&#x7684;&#x81EA;&#x5B9A;&#x4E49;&#x68C0;&#x7D22;&#x529F;&#x80FD;&#x3002;</p>
+</blockquote>
 
                                 
                                 </section>
@@ -284,7 +319,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"各函数功能","level":"1.3.1","depth":2,"next":{"title":"Bug list","level":"1.3.2","depth":2,"path":"doc/dev/dev2.md","ref":"doc/dev/dev2.md","articles":[]},"previous":{"title":"二次开发","level":"1.3","depth":1,"path":"doc/dev/README.md","ref":"doc/dev/README.md","articles":[{"title":"各函数功能","level":"1.3.1","depth":2,"path":"doc/dev/dev1.md","ref":"doc/dev/dev1.md","articles":[]},{"title":"Bug list","level":"1.3.2","depth":2,"path":"doc/dev/dev2.md","ref":"doc/dev/dev2.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/dev/dev1.md","mtime":"2019-07-08T07:21:56.698Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-08T07:26:28.611Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"各函数功能","level":"1.3.1","depth":2,"next":{"title":"Bug list","level":"1.3.2","depth":2,"path":"doc/dev/dev2.md","ref":"doc/dev/dev2.md","articles":[]},"previous":{"title":"二次开发","level":"1.3","depth":1,"path":"doc/dev/README.md","ref":"doc/dev/README.md","articles":[{"title":"各函数功能","level":"1.3.1","depth":2,"path":"doc/dev/dev1.md","ref":"doc/dev/dev1.md","articles":[]},{"title":"Bug list","level":"1.3.2","depth":2,"path":"doc/dev/dev2.md","ref":"doc/dev/dev2.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/dev/dev1.md","mtime":"2019-07-08T08:10:32.965Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-08T08:23:53.956Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
