@@ -1,7 +1,37 @@
 # form-check-input
 一个可以自定义检查格式的输入框
 
+## 引入项目
+
+1. 通过`<script>`标签引入
+
+```
+download from https://github.com/Alfxjx/form-check-input/releases
+
+<script src="index.min.js"></script>
+// or
+<script src="index.js"></script>
+```
+
+2. 通过`npm install`引入
+
+```
+npm install form-check-input
+
+import { init } from 'form-check-input'
+```
+
+3. 通过`CDN`引入
+
+```
+<script src="https://unpkg.com/form-check-input/release/index.min.js"></script>
+// or
+<script src="https://unpkg.com/form-check-input/release/index.js"></script>
+```
+
 ## 快速上手
+
+> 本项目选择 **formCheck** 作为对象
 
 ```
 formCheck.init(id,props);
@@ -9,13 +39,17 @@ formCheck.init(id,props);
 
 ## 官方文档
 
-[this](https://alfxjx.github.io/form-check-input/) 主要包括使用说明以及二次开发的一些帮助。
+[Gitbook](https://alfxjx.github.io/form-check-input/) 主要包括使用说明以及二次开发的一些帮助
+
+[NPM](https://www.npmjs.com/package/form-check-input) npmjs上面的信息。
 
 ## API
 
 ## Issues
 
 请在本项目的[issues](https://github.com/Alfxjx/form-check-input/issues)里面提问。
+
+提问时建议加上TAG
 
 ## 测试功能
 
