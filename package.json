@@ -1,6 +1,6 @@
 {
-  "name": "form-check",
-  "version": "0.0.1",
+  "name": "form-check-input",
+  "version": "0.0.2",
   "description": "an input which automatically check the input word",
   "main": "./src/index.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "check",
     "form"
   ],
-  "author": "Alfxjx",
+  "author": "alfxjx",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Alfxjx/form-check-input/issues"
