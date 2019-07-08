@@ -18,8 +18,8 @@ var regWeb = /^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/;
 var deaultPassword = /^[a-zA-Z0-9]\w{5,17}$/;
 
 var deaultStyle = {
-	display: 'block',
-	width: '100%',
+	display: 'inline-block',
+	width: '90%',
 	padding: '0.375rem 0.75rem',
 	lineHeight: '1.5',
 	backgroundColor: '#fff',
@@ -29,21 +29,13 @@ var deaultStyle = {
 	transition: 'border-color .15s ease-in-out,box-shadow .15s ease-in-out'
 };
 
-var setCss = function setCss(obj, style, shouldGetCSS) {
-	if (shouldGetCSS) {
-		for (var attr in style) {
-			obj.style[attr] = style[attr];
-		}
-	}
-};
-
 var $ = function $(id) {
 	return document.getElementById(id);
 };
 
 var setProps = function setProps(_ref) {
 	var _ref$lang = _ref.lang,
-	    lang = _ref$lang === undefined ? 'en' : _ref$lang,
+	    lang = _ref$lang === undefined ? 'cn' : _ref$lang,
 	    _ref$showClear = _ref.showClear,
 	    showClear = _ref$showClear === undefined ? false : _ref$showClear,
 	    _ref$showEye = _ref.showEye,
@@ -79,12 +71,30 @@ var init = function init(id, properties) {
 	var input = document.createElement('input');
 	var prop = setProps(properties || {});
 	$(id).appendChild(input);
+
+	// 绑定一个class
 	$(id).childNodes[0].className = 'form-check-input';
+
+	// 设置css
 	setCss(input, deaultStyle, prop.withdefaultCSS);
+
+	// 设置placeholder
 	input.placeholder = prop.placeholder;
+
+	// 绑定监听输入
 	var inputText = watchTyping(id, prop);
 	console.log('\u76EE\u524D\u7684\u503C\u662F' + inputText);
-	// formatTest(inputText, prop);
+
+	// 展示eye
+	drawMust(id, prop);
+};
+
+var setCss = function setCss(obj, style, shouldGetCSS) {
+	if (shouldGetCSS) {
+		for (var attr in style) {
+			obj.style[attr] = style[attr];
+		}
+	}
 };
 
 var watchTyping = function watchTyping(id, prop) {
@@ -100,11 +110,16 @@ var watchTyping = function watchTyping(id, prop) {
 			return Reflect.set(target, key, value, receiver);
 		}
 	});
+
 	inputNode.addEventListener('keyup', function (e) {
 		proxyInput.text = e.target.value;
 		console.log('input:' + proxyInput.text);
+
+		// 检查格式
 		var formatRes = formatTest(proxyInput.text, prop);
 		console.log(prop.type + '+' + formatRes);
+
+		// 渲染hint
 		return proxyInput.text;
 	});
 };
@@ -112,16 +127,16 @@ var watchTyping = function watchTyping(id, prop) {
 var formatTest = function formatTest(val, prop) {
 	var res = void 0;
 	switch (prop.type) {
-		case "email":
+		case 'email':
 			res = regEmail.test(val);
 			break;
-		case "phone":
+		case 'phone':
 			res = regPhone.test(val);
 			break;
-		case "web":
+		case 'web':
 			res = regWeb.test(val);
 			break;
-		case "password":
+		case 'password':
 			res = deaultPassword.test(val);
 			break;
 		default:
@@ -129,6 +144,17 @@ var formatTest = function formatTest(val, prop) {
 			break;
 	}
 	return res;
+};
+
+var drawMust = function drawMust(id, prop) {
+	if (prop.isMust) {
+		console.log('draw must');
+		var must = document.createElement('span');
+		must.innerHTML = "*";
+		must.style.color = "red";
+		must.style.margin = "0 0 0 5px";
+		$(id).appendChild(must);
+	}
 };
 
 exports.init = init;
