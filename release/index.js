@@ -29,9 +29,11 @@ var deaultStyle = {
 	transition: 'border-color .15s ease-in-out,box-shadow .15s ease-in-out'
 };
 
-var setCss = function setCss(obj, style) {
-	for (var attr in style) {
-		obj.style[attr] = style[attr];
+var setCss = function setCss(obj, style, shouldGetCSS) {
+	if (shouldGetCSS) {
+		for (var attr in style) {
+			obj.style[attr] = style[attr];
+		}
 	}
 };
 
@@ -56,14 +58,9 @@ var setProps = function setProps(_ref) {
 	    placeholder = _ref$placeholder === undefined ? 'please input' : _ref$placeholder,
 	    _ref$isMust = _ref.isMust,
 	    isMust = _ref$isMust === undefined ? false : _ref$isMust,
-	    _ref$isPhone = _ref.isPhone,
-	    isPhone = _ref$isPhone === undefined ? false : _ref$isPhone,
-	    _ref$isWeb = _ref.isWeb,
-	    isWeb = _ref$isWeb === undefined ? false : _ref$isWeb,
-	    _ref$isEmail = _ref.isEmail,
-	    isEmail = _ref$isEmail === undefined ? false : _ref$isEmail,
-	    _ref$isPassword = _ref.isPassword,
-	    isPassword = _ref$isPassword === undefined ? false : _ref$isPassword;
+	    type = _ref.type,
+	    _ref$withdefaultCSS = _ref.withdefaultCSS,
+	    withdefaultCSS = _ref$withdefaultCSS === undefined ? true : _ref$withdefaultCSS;
 	return {
 		lang: lang,
 		showClear: showClear,
@@ -73,10 +70,8 @@ var setProps = function setProps(_ref) {
 		showAutofix: showAutofix,
 		placeholder: placeholder,
 		isMust: isMust,
-		isPhone: isPhone,
-		isWeb: isWeb,
-		isEmail: isEmail,
-		isPassword: isPassword
+		type: type,
+		withdefaultCSS: withdefaultCSS
 	};
 };
 
@@ -85,7 +80,7 @@ var init = function init(id, properties) {
 	var prop = setProps(properties || {});
 	$(id).appendChild(input);
 	$(id).childNodes[0].className = 'form-check-input';
-	setCss(input, deaultStyle);
+	setCss(input, deaultStyle, prop.withdefaultCSS);
 	input.placeholder = prop.placeholder;
 	var inputText = watchTyping(id, prop);
 	console.log('\u76EE\u524D\u7684\u503C\u662F' + inputText);
@@ -109,32 +104,29 @@ var watchTyping = function watchTyping(id, prop) {
 		proxyInput.text = e.target.value;
 		console.log('input:' + proxyInput.text);
 		var formatRes = formatTest(proxyInput.text, prop);
-		console.log(formatRes);
+		console.log(prop.type + '+' + formatRes);
 		return proxyInput.text;
 	});
 };
 
 var formatTest = function formatTest(val, prop) {
-	var res = {};
-	if (prop.isPhone) {
-		var phone = regPhone.test(val);
-		console.log(phone);
-		res['phone'] = phone;
-	}
-	if (prop.isEmail) {
-		var email = regEmail.test(val);
-		console.log(email);
-		res['email'] = email;
-	}
-	if (prop.isWeb) {
-		var web = regWeb.test(val);
-		console.log(web);
-		res['web'] = web;
-	}
-	if (prop.isPassword) {
-		var password = deaultPassword.test(val);
-		console.log(password);
-		res['password'] = password;
+	var res = void 0;
+	switch (prop.type) {
+		case "email":
+			res = regEmail.test(val);
+			break;
+		case "phone":
+			res = regPhone.test(val);
+			break;
+		case "web":
+			res = regWeb.test(val);
+			break;
+		case "password":
+			res = deaultPassword.test(val);
+			break;
+		default:
+			res = true;
+			break;
 	}
 	return res;
 };
