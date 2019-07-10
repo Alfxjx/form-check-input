@@ -5,6 +5,7 @@ const regPhone = /^[1][3,4,5,7,8][0-9]{9}$/;
 const regWeb = /^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/;
 const deaultPassword = /^[a-zA-Z0-9]\w{5,17}$/;
 
+
 const deaultStyle = {
 	display: 'inline-block',
 	width: '80%',
@@ -16,6 +17,8 @@ const deaultStyle = {
 	borderRadius: '0.25rem',
 	transition: 'border-color .15s ease-in-out,box-shadow .15s ease-in-out',
 };
+
+let svgEyeInput = [];
 
 const svgEyeClosed = [
 	'M512 800c-66.112 0-128.32-24.896-182.656-60.096l94.976-94.976A156.256 156.256 0 0 0 512 672c88.224 0 160-71.776 160-160a156.256 156.256 0 0 0-27.072-87.68l101.536-101.536C837.28 398.624 896 493.344 896 512c0 32-171.936 288-384 288m96-288a96 96 0 0 1-96 96c-14.784 0-28.64-3.616-41.088-9.664l127.424-127.424c6.048 12.448 9.664 26.304 9.664 41.088M128 512c0-32 171.936-288 384-288 66.112 0 128.32 24.896 182.656 60.096L277.536 701.216C186.72 625.376 128 530.656 128 512m664.064-234.816l91.328-91.328-45.248-45.248-97.632 97.632C673.472 192.704 595.456 160 512 160 265.248 160 64 443.008 64 512c0 39.392 65.728 148.416 167.936 234.816l-91.328 91.328 45.248 45.248 97.632-97.632C350.528 831.296 428.544 864 512 864c246.752 0 448-283.008 448-352 0-39.392-65.728-148.416-167.936-234.816',
@@ -46,7 +49,8 @@ const setProps = ({
 	placeholder = 'please input',
 	isMust = false,
 	mustPosition = 'left',
-	type,
+  type,
+  userPassword,
 	withdefaultCSS = true,
 }) => ({
 	lang,
@@ -58,7 +62,8 @@ const setProps = ({
 	placeholder,
 	isMust,
 	mustPosition,
-	type,
+  type,
+  userPassword,
 	withdefaultCSS,
 });
 
@@ -81,10 +86,10 @@ const init = (id, properties) => {
 	console.log(`目前的值是${inputText}`);
 
 	// 展示eye
-	let showEyeRes = showWhichEye(id, prop);
+	let eyeRes = isShowEye(id, prop);
 
 	// 切换Eye
-	switchEye(id, prop, showEyeRes);
+	switchEye(id, prop, eyeRes);
 
 	// 展示clear
 	drawClear(id, prop);
@@ -154,97 +159,79 @@ const formatTest = (val, prop) => {
 	return res;
 };
 
-const showWhichEye = (id, prop) => {
-	let res;
-	if (prop.type === 'password') {
+const isShowEye = (id, prop) => {
+	// 需要是密码才显示。
+	let defaultType = $(id).childNodes[0].type;
+	if (prop.type === 'password' || prop.userPassword || defaultType === 'password') {
 		$(id).querySelector('input').type = 'password';
 		$(id).querySelector('input').autocomplete = 'on';
-		drawEyeOpen(id, prop);
-		return (res = true);
+		if (prop.showEye) {
+      drawEye(id, prop);
+      return true;
+		}
 	} else {
-		drawEyeClosed(id, prop);
-		return (res = false);
+    return false;
 	}
 };
 
 const switchEye = (id, prop, showEyeRes) => {
-	let svgList = $(id).querySelectorAll('svg');
-	if (svgList) {
+  let svgList = $(id).querySelectorAll('svg');
+  console.log(svgList);
+	if (svgList.length>0) {
 		svgList[0].addEventListener('click', () => {
-			if(showEyeRes) {
-        // TODO 删除 eye
-        removeEye(id,prop);
-        drawEyeClosed(id,prop)
-        $(id).querySelector('input').type = 'text';
-      } else {
-        removeEye(id,prop);
-        drawEyeOpen(id, prop);
-        $(id).querySelector('input').type = 'password';
-      }
+			if (showEyeRes) {
+        svgEyeInput = svgEyeClosed;
+        showEyeRes = !showEyeRes;
+				$(id).querySelector('input').type = 'text';
+			} else {
+        svgEyeInput = svgEyeOpen;
+        showEyeRes = !showEyeRes;
+				$(id).querySelector('input').type = 'password';
+			}
 		});
 	} else {
 		console.log('no svg');
 	}
 };
 
+// TODO
 const drawHint = prop => {};
 
-const drawEyeOpen = (id, prop) => {
+const drawEye = (id, prop) => {
+  let svgEyeInput = svgEyeOpen;
 	if (prop.showEye) {
-		if (prop.showClear && prop.isMust && prop.mustPosition === 'right') {
-			drawSVG(id, svgEyeOpen, '80px');
-		} else if (!prop.showClear && prop.isMust && prop.mustPosition === 'right') {
-			drawSVG(id, svgEyeOpen, '60px');
-		} else if (prop.showClear && prop.isMust && prop.mustPosition === 'left') {
-			drawSVG(id, svgEyeOpen, '65px');
-		} else if (!prop.showClear && prop.isMust && prop.mustPosition === 'left') {
-			drawSVG(id, svgEyeOpen, '45px');
-		}
-		if (prop.showClear && !prop.isMust) {
-			drawSVG(id, svgEyeOpen, '80px');
-		}
-		if (!prop.showClear && !prop.isMust) {
-			drawSVG(id, svgEyeOpen, '60px');
-		}
-	}
-};
-
-const drawEyeClosed = (id, prop) => {
-	if (prop.showEye) {
-		if (prop.showClear && prop.isMust && prop.mustPosition === 'right') {
-			drawSVG(id, svgEyeClosed, '80px');
-		} else if (!prop.showClear && prop.isMust && prop.mustPosition === 'right') {
-			drawSVG(id, svgEyeClosed, '60px');
-		} else if (prop.showClear && prop.isMust && prop.mustPosition === 'left') {
-			drawSVG(id, svgEyeClosed, '65px');
-		} else if (!prop.showClear && prop.isMust && prop.mustPosition === 'left') {
-			drawSVG(id, svgEyeClosed, '45px');
-		}
-		if (prop.showClear && !prop.isMust) {
-			drawSVG(id, svgEyeClosed, '80px');
-		}
-		if (!prop.showClear && !prop.isMust) {
-			drawSVG(id, svgEyeClosed, '60px');
+		if (prop.showClear) {
+			if (prop.isMust) {
+				if (prop.mustPosition === 'right') {
+					drawSVG(id, svgEyeInput, '80px');
+				} else if (prop.mustPosition === 'left') {
+					drawSVG(id, svgEyeInput, '60px');
+				}
+			} else {
+				drawSVG(id, svgEyeInput, '80px');
+			}
+		} else {
+			if (prop.isMust) {
+				if (prop.mustPosition === 'right') {
+					drawSVG(id, svgEyeInput, '65px');
+				} else if (prop.mustPosition === 'left') {
+					drawSVG(id, svgEyeInput, '40px');
+				}
+			} else {
+				drawSVG(id, svgEyeInput, '60px');
+			}
 		}
 	}
 };
 
 const drawClear = (id, prop) => {
 	if (prop.showClear) {
-		if (prop.showEye && prop.isMust && prop.mustPosition === 'right') {
+		if (prop.isMust && prop.mustPosition === 'right') {
 			drawSVG(id, svgClear, '60px');
-		} else if (!prop.showEye && prop.isMust && prop.mustPosition === 'right') {
+		} else if (prop.isMust && prop.mustPosition === 'left') {
 			drawSVG(id, svgClear, '45px');
-		} else if (prop.showEye && prop.isMust && prop.mustPosition === 'left') {
-			drawSVG(id, svgClear, '45px');
-		} else if (!prop.showEye && prop.isMust && prop.mustPosition === 'left') {
-			drawSVG(id, svgClear, '45px');
-		}
-		if (prop.showEye && !prop.isMust) {
+		} else if (!prop.isMust) {
 			drawSVG(id, svgClear, '60px');
-		}
-		if (!prop.showEye && !prop.isMust) {
-			drawSVG(id, svgClear, '45px');
 		}
 		let svgList = $(id).querySelectorAll('svg');
 		svgList[svgList.length - 1].addEventListener('click', () => {

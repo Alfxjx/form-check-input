@@ -12,6 +12,7 @@
 | isMust        | Boolean  |        false     | 是否是必填项（*）           |
 | mustPosition        | String  |        left     | left/right，设置星号位置。           |
 | type        | String  |       /      | 需要检查的格式类型           |
+|userPassword | Regex  | /   |  自定义密码的匹配格式                    |
 | withdefaultCSS        | Boolean  |      true       | 是否添加默认样式（Bootstrap）  |
 
 

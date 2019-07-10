@@ -1,4 +1,5 @@
 # form-check-input
+
 这是一个可以自定义检查格式的输入框。
 
 > 都说表单是前端的CRUD,那我也想要一个ORM系统
@@ -43,10 +44,15 @@ formCheck.init(id,{
   type: 'Email'
 });
 ```
+需要挂在一个id为`${id}`的form节点上：
+
+```html
+<form id="{{id}}"></form>
+```
 
 ## 官方文档
 
-[Gitbook](https://alfxjx.github.io/form-check-input/) 主要包括使用说明以及二次开发的一些帮助
+[Gitbook](https://alfxjx.github.io/form-check-input/docs/) 主要包括使用说明以及二次开发的一些帮助
 
 [NPM](https://www.npmjs.com/package/form-check-input) npmjs上面的信息。
 
@@ -64,6 +70,7 @@ formCheck.init(id,{
 | isMust        | Boolean  |        false     | 是否是必填项（*）           |
 | mustPosition        | String  |        left     | left/right，设置星号位置。           |
 | type        | String  |       /      | 需要检查的格式类型           |
+|userPassword | Regex  | /   |  自定义密码的匹配格式                    |
 | withdefaultCSS        | Boolean  |      true       | 是否添加默认样式（Bootstrap）  |
 
 ## Issues
@@ -84,10 +91,13 @@ npm run example
 
 ## TODO
 
-- showClear & showEye
-- showHint & showHelp
-- showAutofix
-- isMust
+- ~~showClear~~
+- ~~isMust & mustPosition~~
+- ~~showEye~~
+- change svg when password is unshown.
+- showHint & showHelp & showAutofix
+- userPassword
+
 
 ## About/关于
 
