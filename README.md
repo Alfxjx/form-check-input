@@ -3,6 +3,8 @@
 
 > 都说表单是前端的CRUD,那我也想要一个ORM系统
 
+[DEMO](https://alfxjx.github.io/form-check-input/example.html)
+
 ## 引入项目
 
 1. 通过`<script>`标签引入
@@ -35,8 +37,11 @@ import { init } from 'form-check-input'
 
 > 本项目选择 **formCheck** 作为对象
 
-```
-formCheck.init(id,props);
+``` javascript
+formCheck.init(id,{
+  showClear: true,
+  type: 'Email'
+});
 ```
 
 ## 官方文档
@@ -83,13 +88,6 @@ npm run example
 - showHint & showHelp
 - showAutofix
 - isMust
-
-
-## TIPS
-
-`gitbook build` 之前需要把`/docs/` 改回 `_book/`，打包完成之后再改回去。
-
-这样就可以使用github的主页了，而且链接短一点。
 
 ## About/关于
 
