@@ -13,3 +13,8 @@
 | mustPosition        | String  |        left     | left/right，设置星号位置。           |
 | type        | String  |       /      | 需要检查的格式类型           |
 | withdefaultCSS        | Boolean  |      true       | 是否添加默认样式（Bootstrap）  |
+
+
+## 须知
+
+- `mustPosition` 需要在 `isMust===true`时使用
