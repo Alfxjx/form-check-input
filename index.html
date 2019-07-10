@@ -30,7 +30,7 @@
 				type: 'password',
 				isMust: true,
 				mustPosition: 'left',
-				showClear: false,
+				showClear: true,
 				showEye: false,
 			});
 			formCheck.init('root1', {
@@ -44,13 +44,13 @@
 			formCheck.init('root2', {
 				placeholder: '3',
 				type: 'password',
-				showClear: false,
+				showClear: true,
 				showEye: true,
 			});
 			formCheck.init('root3', {
         placeholder: '4',
         type:'password',
-        showClear: true,
+        showClear: false,
         showEye: true,
         // BUG 不能只显示clear
 			});

@@ -8,7 +8,7 @@ const deaultPassword = /^[a-zA-Z0-9]\w{5,17}$/;
 
 const deaultStyle = {
 	display: 'inline-block',
-	width: '80%',
+	width: 'calc(100% - 60px)',
 	padding: '0.375rem 0.75rem',
 	lineHeight: '1.5',
 	backgroundColor: '#fff',
@@ -203,22 +203,22 @@ const drawEye = (id, prop) => {
 		if (prop.showClear) {
 			if (prop.isMust) {
 				if (prop.mustPosition === 'right') {
-					drawSVG(id, svgEyeInput, '80px');
-				} else if (prop.mustPosition === 'left') {
 					drawSVG(id, svgEyeInput, '60px');
-				}
-			} else {
-				drawSVG(id, svgEyeInput, '80px');
-			}
-		} else {
-			if (prop.isMust) {
-				if (prop.mustPosition === 'right') {
-					drawSVG(id, svgEyeInput, '65px');
 				} else if (prop.mustPosition === 'left') {
 					drawSVG(id, svgEyeInput, '40px');
 				}
 			} else {
 				drawSVG(id, svgEyeInput, '60px');
+			}
+		} else {
+			if (prop.isMust) {
+				if (prop.mustPosition === 'right') {
+					drawSVG(id, svgEyeInput, '40px');
+				} else if (prop.mustPosition === 'left') {
+					drawSVG(id, svgEyeInput, '20px');
+				}
+			} else {
+				drawSVG(id, svgEyeInput, '40px');
 			}
 		}
 	}
@@ -227,11 +227,11 @@ const drawEye = (id, prop) => {
 const drawClear = (id, prop) => {
 	if (prop.showClear) {
 		if (prop.isMust && prop.mustPosition === 'right') {
-			drawSVG(id, svgClear, '60px');
+			drawSVG(id, svgClear, '40px');
 		} else if (prop.isMust && prop.mustPosition === 'left') {
-			drawSVG(id, svgClear, '45px');
+			drawSVG(id, svgClear, '20px');
 		} else if (!prop.isMust) {
-			drawSVG(id, svgClear, '60px');
+			drawSVG(id, svgClear, '40px');
 		}
 		let svgList = $(id).querySelectorAll('svg');
 		svgList[svgList.length - 1].addEventListener('click', () => {
