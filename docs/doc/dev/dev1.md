@@ -53,3 +53,8 @@ const deaultPassword = /^[a-zA-Z0-9]\w{5,17}$/;
 ```
 
 > 未来会引入更多的自定义检索功能。
+
+
+## `drawMust(id,prop)`
+
+若是选择显示必填，则在input之后添加一个红色的*号。

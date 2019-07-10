@@ -236,7 +236,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="form-check-input">form-check-input</h1>
-<p>&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x68C0;&#x67E5;&#x683C;&#x5F0F;&#x7684;&#x8F93;&#x5165;&#x6846;</p>
+<p>&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x68C0;&#x67E5;&#x683C;&#x5F0F;&#x7684;&#x8F93;&#x5165;&#x6846;&#x3002;</p>
+<blockquote>
+<p>&#x90FD;&#x8BF4;&#x8868;&#x5355;&#x662F;&#x524D;&#x7AEF;&#x7684;CRUD,&#x90A3;&#x6211;&#x4E5F;&#x60F3;&#x8981;&#x4E00;&#x4E2A;ORM&#x7CFB;&#x7EDF;</p>
+</blockquote>
+<p><a href="https://alfxjx.github.io/form-check-input/example.html" target="_blank">DEMO</a></p>
 <h2 id="&#x5F15;&#x5165;&#x9879;&#x76EE;">&#x5F15;&#x5165;&#x9879;&#x76EE;</h2>
 <ol>
 <li>&#x901A;&#x8FC7;<code>&lt;script&gt;</code>&#x6807;&#x7B7E;&#x5F15;&#x5165;</li>
@@ -262,9 +266,16 @@ import { init } from &apos;form-check-input&apos;
 <blockquote>
 <p>&#x672C;&#x9879;&#x76EE;&#x9009;&#x62E9; <strong>formCheck</strong> &#x4F5C;&#x4E3A;&#x5BF9;&#x8C61;</p>
 </blockquote>
-<pre><code>formCheck.init(id,props);
-</code></pre><h2 id="&#x5B98;&#x65B9;&#x6587;&#x6863;">&#x5B98;&#x65B9;&#x6587;&#x6863;</h2>
-<p><a href="https://alfxjx.github.io/form-check-input/" target="_blank">Gitbook</a> &#x4E3B;&#x8981;&#x5305;&#x62EC;&#x4F7F;&#x7528;&#x8BF4;&#x660E;&#x4EE5;&#x53CA;&#x4E8C;&#x6B21;&#x5F00;&#x53D1;&#x7684;&#x4E00;&#x4E9B;&#x5E2E;&#x52A9;</p>
+<pre><code class="lang-javascript">formCheck.init(id,{
+  showClear: <span class="hljs-literal">true</span>,
+  type: <span class="hljs-string">&apos;Email&apos;</span>
+});
+</code></pre>
+<p>&#x9700;&#x8981;&#x6302;&#x5728;&#x4E00;&#x4E2A;id&#x4E3A;<code>${id}</code>&#x7684;form&#x8282;&#x70B9;&#x4E0A;&#xFF1A;</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre>
+<h2 id="&#x5B98;&#x65B9;&#x6587;&#x6863;">&#x5B98;&#x65B9;&#x6587;&#x6863;</h2>
+<p><a href="https://alfxjx.github.io/form-check-input/docs/" target="_blank">Gitbook</a> &#x4E3B;&#x8981;&#x5305;&#x62EC;&#x4F7F;&#x7528;&#x8BF4;&#x660E;&#x4EE5;&#x53CA;&#x4E8C;&#x6B21;&#x5F00;&#x53D1;&#x7684;&#x4E00;&#x4E9B;&#x5E2E;&#x52A9;</p>
 <p><a href="https://www.npmjs.com/package/form-check-input" target="_blank">NPM</a> npmjs&#x4E0A;&#x9762;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
 <h2 id="api">API</h2>
 <table>
@@ -326,10 +337,22 @@ import { init } from &apos;form-check-input&apos;
 <td>&#x662F;&#x5426;&#x662F;&#x5FC5;&#x586B;&#x9879;&#xFF08;*&#xFF09;</td>
 </tr>
 <tr>
+<td>mustPosition</td>
+<td style="text-align:center">String</td>
+<td style="text-align:center">left</td>
+<td>left/right&#xFF0C;&#x8BBE;&#x7F6E;&#x661F;&#x53F7;&#x4F4D;&#x7F6E;&#x3002;</td>
+</tr>
+<tr>
 <td>type</td>
 <td style="text-align:center">String</td>
 <td style="text-align:center">/</td>
 <td>&#x9700;&#x8981;&#x68C0;&#x67E5;&#x7684;&#x683C;&#x5F0F;&#x7C7B;&#x578B;</td>
+</tr>
+<tr>
+<td>userPassword</td>
+<td style="text-align:center">Regex</td>
+<td style="text-align:center">/</td>
+<td>&#x81EA;&#x5B9A;&#x4E49;&#x5BC6;&#x7801;&#x7684;&#x5339;&#x914D;&#x683C;&#x5F0F;</td>
 </tr>
 <tr>
 <td>withdefaultCSS</td>
@@ -349,14 +372,13 @@ npm run example
 </code></pre><p>&#x6253;&#x5F00; <a href="http://localhost:6324/index.html" target="_blank">&#x6B64;&#x94FE;&#x63A5;</a>&#xFF0C;&#x67E5;&#x770B;&#x5B9E;&#x4F8B;&#x529F;&#x80FD;&#x3002;</p>
 <h2 id="todo">TODO</h2>
 <ul>
-<li>showClear &amp; showEye</li>
-<li>showHint &amp; showHelp</li>
-<li>showAutofix</li>
-<li>isMust</li>
+<li><del>showClear</del></li>
+<li><del>isMust &amp; mustPosition</del></li>
+<li><del>showEye</del></li>
+<li>change svg when password is unshown.</li>
+<li>showHint &amp; showHelp &amp; showAutofix</li>
+<li>userPassword</li>
 </ul>
-<h2 id="tips">TIPS</h2>
-<p><code>gitbook build</code> &#x4E4B;&#x524D;&#x9700;&#x8981;&#x628A;<code>/docs/</code> &#x6539;&#x56DE; <code>_book/</code>&#xFF0C;&#x6253;&#x5305;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#x518D;&#x6539;&#x56DE;&#x53BB;&#x3002;</p>
-<p>&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;github&#x7684;&#x4E3B;&#x9875;&#x4E86;&#xFF0C;&#x800C;&#x4E14;&#x94FE;&#x63A5;&#x77ED;&#x4E00;&#x70B9;&#x3002;</p>
 <h2 id="about&#x5173;&#x4E8E;">About/&#x5173;&#x4E8E;</h2>
 <ul>
 <li><a href="https://www.github.com/Alfxjx" target="_blank">Alfxjx</a></li>
@@ -402,7 +424,7 @@ npm run example
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"使用文档","level":"1.2","depth":1,"path":"doc/use/README.md","ref":"doc/use/README.md","articles":[{"title":"配置说明","level":"1.2.1","depth":2,"path":"doc/use/use1.md","ref":"doc/use/use1.md","articles":[]},{"title":"注意事项","level":"1.2.2","depth":2,"path":"doc/use/use2.md","ref":"doc/use/use2.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-07-08T08:22:49.415Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-08T08:23:53.956Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"使用文档","level":"1.2","depth":1,"path":"doc/use/README.md","ref":"doc/use/README.md","articles":[{"title":"配置说明","level":"1.2.1","depth":2,"path":"doc/use/use1.md","ref":"doc/use/use1.md","articles":[]},{"title":"注意事项","level":"1.2.2","depth":2,"path":"doc/use/use2.md","ref":"doc/use/use2.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-07-10T14:02:20.416Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-10T14:04:33.882Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
