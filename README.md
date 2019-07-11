@@ -1,8 +1,10 @@
 # form-check-input
 
-这是一个可以自定义检查格式的输入框。
+这是一个可以自定义检查格式，显示清除按钮，显示密码的输入框。
 
-> 都说表单是前端的CRUD,那我也想要一个ORM系统
+![demo](src/assets/demo.png)
+
+> 都说表单是前端的CRUD
 
 [DEMO](https://alfxjx.github.io/form-check-input/example.html)
 
@@ -63,7 +65,7 @@ formCheck.init(id,{
 | lang         | String  |    cn       | 语言，目前支持中文                           |
 | showClear        | Boolean  |   false          | 全部清除按钮       |
 | showEye        | Boolean  |     false        | 显示密码按钮           |
-| showHint        | Boolean  |      true       | 显示输入结果的提示行        |
+| showHint        | Boolean  |      false       | 显示输入结果的提示行        |
 | showHelp        | Boolean  |        false     | 显示输入内容提示        |
 | showAutofix        | Boolean  |       false      | 自动补全          |
 | placeholder        | String  |     please input        | 占位文字           |
@@ -78,6 +80,28 @@ formCheck.init(id,{
 请在本项目的[issues](https://github.com/Alfxjx/form-check-input/issues)里面提问。
 
 提问时建议加上TAG
+
+## 在 Vue.js 中使用
+
+`<form id='input'></form>`
+
+```js
+import { init } from 'form-check-input';
+
+export default {
+	// ...
+	mounted() {
+		init('input', { 
+      type: 'phone', 
+      showHint: true, 
+      showClear: true, 
+      showEye: true 
+    });
+	},
+	// ...
+};
+```
+## 在 React.js 中使用
 
 ## 测试功能
 
@@ -95,7 +119,7 @@ npm run example
 - ~~isMust & mustPosition~~
 - ~~showEye~~
 - change svg when password is unshown.
-- showHint & showHelp & showAutofix
+- ~~showHint~~ & showHelp & showAutofix
 - userPassword
 
 

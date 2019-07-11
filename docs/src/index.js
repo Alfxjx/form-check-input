@@ -5,10 +5,9 @@ const regPhone = /^[1][3,4,5,7,8][0-9]{9}$/;
 const regWeb = /^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/;
 const deaultPassword = /^[a-zA-Z0-9]\w{5,17}$/;
 
-
 const deaultStyle = {
 	display: 'inline-block',
-	width: '80%',
+	width: 'calc(100% - 60px)',
 	padding: '0.375rem 0.75rem',
 	lineHeight: '1.5',
 	backgroundColor: '#fff',
@@ -43,14 +42,14 @@ const setProps = ({
 	lang = 'cn',
 	showClear = false,
 	showEye = false,
-	showHint = true,
+	showHint = false,
 	showHelp = false,
 	showAutofix = false,
 	placeholder = 'please input',
 	isMust = false,
 	mustPosition = 'left',
-  type,
-  userPassword,
+	type,
+	userPassword,
 	withdefaultCSS = true,
 }) => ({
 	lang,
@@ -62,22 +61,25 @@ const setProps = ({
 	placeholder,
 	isMust,
 	mustPosition,
-  type,
-  userPassword,
+	type,
+	userPassword,
 	withdefaultCSS,
 });
 
 const init = (id, properties) => {
-	let input = document.createElement('input');
 	let prop = setProps(properties || {});
+
+	let input = document.createElement('input');
 	$(id).appendChild(input);
+
+	// drawHint(id, prop);
 
 	// 绑定一个class
 	$(id).childNodes[0].className = 'form-check-input';
 
 	// 设置css
 	setCss(input, deaultStyle, prop.withdefaultCSS);
-
+	$(id).style.fontSize = '16px';
 	// 设置placeholder
 	input.placeholder = prop.placeholder;
 
@@ -89,7 +91,7 @@ const init = (id, properties) => {
 	let eyeRes = isShowEye(id, prop);
 
 	// 切换Eye
-	switchEye(id, prop, eyeRes);
+	switchEye(id, eyeRes);
 
 	// 展示clear
 	drawClear(id, prop);
@@ -130,9 +132,19 @@ const watchTyping = (id, prop) => {
 		// 检查格式
 		let formatRes = formatTest(proxyInput.text, prop);
 		console.log(`${prop.type}+${formatRes}`);
-
-		// TODO: 渲染hint
-		drawHint(prop);
+    // 显示提示的内容
+    if(prop.showHint) {
+      drawHint(id, prop);
+      let hintRes = $(id).querySelector('p');
+      // formatRes? hintRes.innerHTML = "ok" : hintRes.innerHTML = 'error'
+      if(formatRes) {
+        hintRes.innerHTML = "ok";
+        hintRes.style.color = 'green';
+      } else {
+        hintRes.innerHTML = "error";
+        hintRes.style.color = 'red';
+      }
+    }
 		return proxyInput.text;
 	});
 };
@@ -166,26 +178,26 @@ const isShowEye = (id, prop) => {
 		$(id).querySelector('input').type = 'password';
 		$(id).querySelector('input').autocomplete = 'on';
 		if (prop.showEye) {
-      drawEye(id, prop);
-      return true;
+			drawEye(id, prop);
+			return true;
 		}
 	} else {
-    return false;
+		return false;
 	}
 };
 
-const switchEye = (id, prop, showEyeRes) => {
-  let svgList = $(id).querySelectorAll('svg');
-  console.log(svgList);
-	if (svgList.length>0) {
+const switchEye = (id, showEyeRes) => {
+	let svgList = $(id).querySelectorAll('svg');
+	console.log(svgList);
+	if (svgList.length > 0) {
 		svgList[0].addEventListener('click', () => {
 			if (showEyeRes) {
-        svgEyeInput = svgEyeClosed;
-        showEyeRes = !showEyeRes;
+				svgEyeInput = svgEyeClosed;
+				showEyeRes = !showEyeRes;
 				$(id).querySelector('input').type = 'text';
 			} else {
-        svgEyeInput = svgEyeOpen;
-        showEyeRes = !showEyeRes;
+				svgEyeInput = svgEyeOpen;
+				showEyeRes = !showEyeRes;
 				$(id).querySelector('input').type = 'password';
 			}
 		});
@@ -195,30 +207,39 @@ const switchEye = (id, prop, showEyeRes) => {
 };
 
 // TODO
-const drawHint = prop => {};
+const drawHint = (id, prop) => {
+	if (prop.showHint) {
+		let hintDOM = document.createElement('p');
+		hintDOM.style.margin = '0 0';
+		hintDOM.style.fontSize = '14px';
+		hintDOM.style.padding = '0 12px';
+		hintDOM.innerHTML = '';
+		$(id).appendChild(hintDOM);
+	}
+};
 
 const drawEye = (id, prop) => {
-  let svgEyeInput = svgEyeOpen;
+	let svgEyeInput = svgEyeOpen;
 	if (prop.showEye) {
 		if (prop.showClear) {
 			if (prop.isMust) {
 				if (prop.mustPosition === 'right') {
-					drawSVG(id, svgEyeInput, '80px');
-				} else if (prop.mustPosition === 'left') {
 					drawSVG(id, svgEyeInput, '60px');
-				}
-			} else {
-				drawSVG(id, svgEyeInput, '80px');
-			}
-		} else {
-			if (prop.isMust) {
-				if (prop.mustPosition === 'right') {
-					drawSVG(id, svgEyeInput, '65px');
 				} else if (prop.mustPosition === 'left') {
 					drawSVG(id, svgEyeInput, '40px');
 				}
 			} else {
 				drawSVG(id, svgEyeInput, '60px');
+			}
+		} else {
+			if (prop.isMust) {
+				if (prop.mustPosition === 'right') {
+					drawSVG(id, svgEyeInput, '40px');
+				} else if (prop.mustPosition === 'left') {
+					drawSVG(id, svgEyeInput, '20px');
+				}
+			} else {
+				drawSVG(id, svgEyeInput, '40px');
 			}
 		}
 	}
@@ -227,15 +248,19 @@ const drawEye = (id, prop) => {
 const drawClear = (id, prop) => {
 	if (prop.showClear) {
 		if (prop.isMust && prop.mustPosition === 'right') {
-			drawSVG(id, svgClear, '60px');
+			drawSVG(id, svgClear, '40px');
 		} else if (prop.isMust && prop.mustPosition === 'left') {
-			drawSVG(id, svgClear, '45px');
+			drawSVG(id, svgClear, '20px');
 		} else if (!prop.isMust) {
-			drawSVG(id, svgClear, '60px');
+			drawSVG(id, svgClear, '40px');
 		}
 		let svgList = $(id).querySelectorAll('svg');
 		svgList[svgList.length - 1].addEventListener('click', () => {
-			$(id).querySelector('input').value = '';
+      $(id).querySelector('input').value = '';
+      if(prop.showHint){
+        $(id).querySelector('p').innerHTML = 'please input:';
+        $(id).querySelector('p').style.color = 'grey';
+      }
 		});
 	}
 };
@@ -247,6 +272,7 @@ const drawMust = (id, prop) => {
 		must.innerHTML = '*';
 		must.style.color = 'red';
 		must.style.margin = '0 5px';
+		must.style.fontSize = '16px';
 		switch (prop.mustPosition) {
 			case 'left':
 				let inputNode = $(id).childNodes[0];

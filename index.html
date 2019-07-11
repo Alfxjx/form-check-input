@@ -23,6 +23,7 @@
 		<form class="width" id="root1"></form>
 		<form class="width" id="root2"></form>
 		<form class="width" id="root3"></form>
+		<form class="width" id="root4"></form>
 		<script src="../release/index.js"></script>
 		<script>
 			formCheck.init('root', {
@@ -48,11 +49,17 @@
 				showEye: true,
 			});
 			formCheck.init('root3', {
-        placeholder: '4',
-        type:'password',
-        showClear: false,
-        showEye: true,
-        // BUG 不能只显示clear
+				placeholder: '4',
+				type: 'password',
+				showClear: false,
+				showEye: true,
+				// BUG 不能只显示clear
+			});
+			formCheck.init('root4', {
+				placeholder: 'test hint',
+				type: 'phone',
+				showClear: true,
+				showHint: true,
 			});
 		</script>
 	</body>

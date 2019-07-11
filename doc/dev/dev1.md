@@ -5,7 +5,7 @@ to be continued...
 ## `init(id, properties)`
 
 选择对应的`id`进行挂载，并且应用配置的`properties`。
-暴露出来的函数，使用时一定会调用的函数。
+暴露出来的函数，使用时**一定**会调用的函数。
 
 ## `setProps()`
 
@@ -22,6 +22,8 @@ to be continued...
 ## `watchTyping(id,prop)`
 
 本函数实现了对输入数据的 **双向绑定**，使用的是ES6的`Proxy`和`Reflect`语法，对输入的数据进行代理，实现了类似MVVM的效果。
+
+在本函数中对输入(`keyup`)进行监听，显示不同的`hint`。
 
 ```javascript
 const watchTyping = (id, prop) => {
@@ -53,8 +55,31 @@ const deaultPassword = /^[a-zA-Z0-9]\w{5,17}$/;
 ```
 
 > 未来会引入更多的自定义检索功能。
+> 预留一个userPassword接口，可以输入自定义正则。
 
+## `isShowEye(id,prop)`
+判断是否是密码，需要是密码才显示。
+三个判断条件：
+- `prop.type === 'password' `
+- `prop.userPassword`
+- `defaultType === 'password'`
+
+## `switchEye(id,showEyeRes)`
+用来切换密码和明文。
+BUG: 切换logo暂时没修好，功能已经完成。
+
+## `drawHint(id,prop)`
+显示输入提示。
+TODO: 样式美化。
+
+## `drawEye(id,prop)`
+绘制眼睛svg。
+
+## `drawClear(id,prop)`
+绘制清除的svg,绑定清除功能以及将hint改为灰色。
 
 ## `drawMust(id,prop)`
+若是选择显示必填，则在input之后（或之前）添加一个红色的*号。
 
-若是选择显示必填，则在input之后添加一个红色的*号。
+## `drawSVG(id,svgProp,distanceToRight)`
+绘制svg通用函数。

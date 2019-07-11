@@ -5,7 +5,7 @@
 | lang         | String  |    cn       | 语言，目前支持中文                           |
 | showClear        | Boolean  |   false          | 全部清除按钮       |
 | showEye        | Boolean  |     false        | 显示密码按钮           |
-| showHint        | Boolean  |      true       | 显示输入结果的提示行        |
+| showHint        | Boolean  |      false       | 显示输入结果的提示行        |
 | showHelp        | Boolean  |        false     | 显示输入内容提示        |
 | showAutofix        | Boolean  |       false      | 自动补全          |
 | placeholder        | String  |     please input        | 占位文字           |
@@ -19,3 +19,4 @@
 ## 须知
 
 - `mustPosition` 需要在 `isMust===true`时使用
+- 

@@ -9,3 +9,5 @@
 提Issues的时候，可以选择**bug**的标签。
 
 to be continued...
+
+- `switchEye(id,showEyeRes)` BUG: 切换logo暂时没修好，功能已经完成。
