@@ -22,37 +22,43 @@
 		<form class="width" id="root"></form>
 		<form class="width" id="root1"></form>
 		<form class="width" id="root2"></form>
-		<form class="width" id="root3"></form>
+    <form class="width" id="root3"></form>
+    <form class="width" id="root4"></form>
 		<script src="https://unpkg.com/form-check-input/release/index.min.js"></script>
 		<script>
-			formCheck.init('root', {
+						formCheck.init('root', {
 				placeholder: '1',
-				type: 'phone',
+				type: 'password',
 				isMust: true,
 				mustPosition: 'left',
 				showClear: true,
-				showEye: true,
+				showEye: false,
 			});
 			formCheck.init('root1', {
 				placeholder: '2',
 				type: 'password',
 				isMust: true,
 				mustPosition: 'right',
-				showClear: true,
+				showClear: false,
 				showEye: true,
 			});
 			formCheck.init('root2', {
 				placeholder: '3',
 				type: 'password',
-				showClear: false,
+				showClear: true,
 				showEye: true,
 			});
 			formCheck.init('root3', {
-        placeholder: '4',
-        type:'password',
-        showClear: true,
-        showEye: true,
-        // BUG 不能只显示clear
+				placeholder: '4',
+				type: 'password',
+				showClear: false,
+				showEye: true,
+			});
+			formCheck.init('root4', {
+				placeholder: 'test hint',
+				type: 'phone',
+				showClear: true,
+				showHint: true,
 			});
 		</script>
 	</body>
